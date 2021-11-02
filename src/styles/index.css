@@ -1,0 +1,255 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap');
+
+/* @font-face {
+  font-family: Qual;
+  src: url('//fonts/Qual.otf');
+  font-weight: bold;
+} */
+
+:root {
+  --font-family: 'Poppins', sans-serif;
+
+  --font-family-special: 'Poppins', sans-serif; 
+
+  --font-size-smallest: 0.2rem; 
+  --font-size-smaller:  0.3rem; 
+  --font-size-small:    0.4rem; 
+  --font-size-medium:   0.625rem; 
+  --font-size-large:    0.675rem;
+  --font-size-larger:   1.00rem;
+  --font-size-largest:  1.25rem;
+
+  --padding-general: 12%;
+
+  --height-navbar: 64px;
+  --height-footer: 54px;
+
+  --color-border: hsla(240, 1%, 48%, 0.3);
+  --color-accent: rgb(255, 102, 51);
+  --color-nav: hsla(0, 0%, 100%, 0.8);
+  --color-bg: rgb(250, 250, 250);
+
+  --color-shadow: rgba(49, 49, 49, 0.4);
+
+  --color-0: rgb(250, 250, 250);
+  --color-10: rgb(244, 244, 244);
+  --color-20: rgb(209, 209, 209);
+  --color-50: rgb(204, 204, 204);
+  --color-80: rgb(43, 43, 43);
+  --color-100: rgb(5, 5, 5);
+
+  --color-contrast-lowest: rgb(254, 254, 254);
+  --color-contrast-lower: rgb(244, 244, 244);
+  --color-contrast-low: rgb(224, 224, 224);
+  --color-contrast-medium: rgb(204, 204, 204);
+  --color-contrast-high: rgb(49, 49, 53);
+  --color-contrast-higher: hsl(240, 8%, 12%);
+  --color-contrast-highest: rgb(5, 5, 5);
+
+  --color-blur-50: rgba(119, 119, 119, 0.5);
+  --color-static-01: rgb(255, 255, 255);
+  --color-static-02: rgb(0, 0, 0);
+
+  --transition-fast: 0.2s;
+
+  --padding-50: 10%;
+  --padding-25: 5%
+}
+
+.darkmode {
+
+  --font-size-small: 10px;
+
+  --color-shadow: rgba(0, 0, 0, 0.4);
+  --color-border: rgba(211, 211, 212, 0.16);
+  --color-accent: rgb(255, 102, 51);
+
+  --color-contrast-lowest: rgb(1, 4, 9);
+  --color-contrast-lower: rgb(55, 55, 55);
+  --color-contrast-low: rgb(112, 112, 112);
+  --color-contrast-medium: rgb(211, 211, 211);
+  --color-contrast-high: rgb(242, 242, 242);
+  --color-contrast-higher: hsl(0, 0%, 100%);
+  --color-contrast-highest: hsl(0, 0%, 100%);
+  
+  --color-static-01: rgb(255, 255, 255);
+  --color-static-02: rgb(0, 0, 0);
+
+
+  --color-0: rgb(20, 20, 20);
+  --color-10: rgb(29, 29, 29);
+  --color-20: rgb(53, 53, 53);
+
+  --color-50: rgb(97, 97, 97);
+  --color-80: rgb(204, 204, 204);
+
+  --color-100: rgb(245, 245, 245);
+
+  --color-blur-50: rgba(10, 10, 10, 0.5)
+}
+
+
+
+@media only screen and (max-width: 600px) {
+  :root {
+
+    --font-size-smallest: 0.5rem; 
+    --font-size-smaller:  0.5rem; 
+    --font-size-small:    0.5rem; 
+    --font-size-medium:   0.625rem; 
+    --font-size-large:    0.75rem;
+    --font-size-larger:   0.85rem;
+    --font-size-largest:  1.25rem;
+
+
+    --padding-general: 4%; 
+    --padding-navbar: 2%;   
+
+    --padding-50: 12px;
+    --padding-25: 6px
+  }
+}
+
+@media only screen and (min-width: 600px) {
+
+  :root {
+
+    --font-size-smallest: 0.5rem; 
+    --font-size-smaller:  0.5rem; 
+    --font-size-small:    0.5rem; 
+    --font-size-medium:   0.625rem; 
+    --font-size-large:    0.75rem;
+    --font-size-larger:   0.85rem;
+    --font-size-largest:  1.25rem;
+
+
+    --padding-general: 8%;    
+    --padding-navbar: 4%;   
+
+  }
+
+}
+
+@media only screen and (min-width: 1200px) {
+
+  :root {
+
+    --font-size-smallest: 0.5rem; 
+    --font-size-smaller:  0.25rem; 
+    --font-size-small:    0.5rem; 
+    --font-size-medium:   0.75rem; 
+    --font-size-large:    1.00rem;
+    --font-size-larger:   1.25rem;
+    --font-size-largest:  1.75rem;
+
+    --padding-general: 20%;
+    --padding-navbar: 4%;
+
+  }
+
+}
+
+/* ANIMATIONS */
+
+@keyframes spawnIn {
+  from {
+    -webkit-transform: scale(0.2);
+            transform: scale(0.2);
+    opacity: 0;
+  }
+
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes spawnOverlay {
+  from {
+    -webkit-transform: scale(0.1);
+            transform: scale(0.1);
+    /* opacity: 0; */
+  }
+
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    /* opacity: 1; */
+  }
+}
+
+
+mark {
+  background-color: var(--color-accent);
+  color: rgb(250, 250, 250);
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 2px 6px;
+}
+
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+*, input, button {outline:none !important;}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  max-width: 100vw;
+  font-family: var(--font-family);
+  background-color: var(--color-0);
+  pointer-events: none;
+
+}
+
+a, :hover {
+  text-decoration: none;
+  /* cursor: none; */
+}
+
+
+/* SELECTION */
+::-moz-selection {
+  color: var(--color-bg);
+  background: var(--color-accent);
+}
+
+::selection {
+  color: var(--color-bg);
+  background: var(--color-accent);
+}
+
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-contrast-lower);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-contrast-low);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-contrast-medium);
+}
+
+#root {
+  pointer-events: none;
+} 
