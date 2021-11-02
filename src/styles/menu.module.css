@@ -1,0 +1,38 @@
+.menu{
+    position: fixed;
+    left: 0;
+    /* width: 24px; */
+    bottom: 44px;
+    z-index: 100;
+    transition: width 0.4s;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    pointer-events: all;
+
+
+}
+
+
+.item{
+    position: relative;
+    height: 34px;
+    text-transform: uppercase;
+    font-family: var(--font-family-special);
+
+    font-size: 24px;
+    color: var(--color-50);
+    padding: 0px 18px 0px 12px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: width 0.2s;
+    width: 0px;
+}
+
+.item:hover {
+    color: rgb(240,240,240);
+    width: 100%;
+    background-color: var(--color-accent);
+
+}
