@@ -48,15 +48,16 @@ export default function Mozaic({ items }) {
 
             <div style={container} ref={containerRef} onMouseMove={(event)=> setPosition([(event.clientX - containerRef.current.getBoundingClientRect().left), ( event.clientY - containerRef.current.getBoundingClientRect().top)])}>
 
-                {dividers.map((divider)=>{
-                    return(
-                        <Divider title={divider}>
+                {/* {dividers.map((divider)=>{
+                    return( */}
+                        <Divider title={null}>
                             {items.map((item)=> {
-                                    return(item.group != divider ? null : <Item data={item} key={item.id} toggle={(event)=> setShowLabel(event)} lastLabel={(event)=> setCurrent(event)}/>)
+                                // item.group != divider ? null : 
+                                    return(<Item data={item} key={item.id} toggle={(event)=> setShowLabel(event)} lastLabel={(event)=> setCurrent(event)}/>)
                                 })}
                         </Divider>
-                    )
-                })}
+                    
+                {/* })} */}
                 
 
                 <Label

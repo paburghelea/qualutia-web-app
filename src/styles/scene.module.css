@@ -7,6 +7,5 @@
     background-color: var(--color-0);
     z-index: 1;
     pointer-events: none;
-    backdrop-filter: blur(10px);
-
+    backdrop-filter: blur(40px);
 }

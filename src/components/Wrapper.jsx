@@ -1,40 +1,49 @@
 import React, { useRef, useState, useEffect } from 'react'
 import '../styles/wrapper.module.css'
+import useStore from "../store";
 
 
-export function Wrapper({ children, slider, getPosition, addStyles, showLocation }) {
+export function Wrapper({ children, slider, addStyles }) {
     
     const wrapper = {
         position: "relative",
         width: "100%",
-        height: "100vh",
-        overflowY: "scroll",
-        overflowX: "hidden",
-        scrollBehavior: "smooth",
-        ...addStyles
+        height: "100%",
+
+        scrollBehavior: "smooth"
     }
     
     const[isScrolling, setIsScrolling] = useState(false)
 
     const containerRef = useRef();
 
-    const[position, setPosition] = useState(0);
   
+    const position = useStore((state)=> state.position)
+    const setPosition = useStore((state)=> state.setPosition)
 
     useEffect(() => {
-        const position = Math.round(Math.abs((100 / (containerRef.current.scrollHeight - containerRef.current.clientHeight)) * containerRef.current.scrollTop))
-  
-        setPosition(position)
-        getPosition(position)
-        setIsScrolling(false)
 
-    }, [isScrolling])
+        function handleScroll() {
+        setPosition(Math.round(Math.abs((100 / (document.body.offsetHeight - window.innerHeight)) * window.pageYOffset)));
+        }
+
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
+
+
+    // useEffect(() => {
+    //     const current_position = Math.round(Math.abs((100 / (containerRef.current.scrollHeight - containerRef.current.clientHeight)) * containerRef.current.scrollTop))
+    //     setPosition(current_position)
+
+    //     setIsScrolling(false)
+
+    // }, [isScrolling])
 
     
     return (
-        <main className={wrapper} ref={containerRef} onScroll={()=> slider ? setIsScrolling(true) : null}>
+        <main style={wrapper} ref={containerRef}>
             {children}
-            {showLocation ? <Location percent={position} radius={30} size={80}/> : null}
         </main>
     )
 }

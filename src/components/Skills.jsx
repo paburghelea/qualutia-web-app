@@ -185,7 +185,7 @@ export default function Skills( { user } ){
                     items.map((item)=> {
                         if(item.type == options[current]){
                             return(
-                                <Item 
+                                <Item
                                     data={item}
                                 />
                             )

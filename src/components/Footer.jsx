@@ -16,6 +16,7 @@ export default function Footer() {
         justifyContent: "space-between",
         display: "flex",
         padding: "16px var(--padding-general) 16px var(--padding-general)",
+        pointerEvents: "all"
     };
 
     const divider = {
@@ -81,7 +82,7 @@ function Link(props) {
         margin: "0px 6px 0px 6px",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: isOver ? "var(--color-contrast-higher)" : "var(--color-contrast-high)",
+        backgroundColor: isOver ? "var(--color-80)" : "var(--color-50)",
         padding: props.padding,
         transition: "0.1s ease-in-out",
         borderRadius: "4px",
@@ -90,7 +91,7 @@ function Link(props) {
     const icon = {
         height: "24px",
         width: "24px",
-        fill: "var(--color-bg)"
+        fill: "var(--color-0)"
     }
 
     const renderIcon = (key) => {

@@ -14,12 +14,20 @@
     grid: 
 
         [row1-start] ". about . ." 100vh [row1-end]
-        [row2-start] ". work work ." 100vh [row2-end]
+        [row2-start] ". work work ." auto [row2-end]
         [row3-start] ". skills skills ." 100vh [row3-end]
         [row4-start] ". . contact ." 100vh [row4-end]
         [row5-start] "footer footer footer footer" 30px [row5-end]
 
         / 20% auto auto 20%;
+}
+
+.moto {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 100px;
+  color: var(--color-10);
 }
 
 
@@ -29,23 +37,26 @@
     grid: 
 
         [row1-start] ". about about ." 100vh [row1-end]
-        [row2-start] ". work work ." 100vh [row2-end]
+        [row2-start] ". work work ." auto [row2-end]
         [row3-start] ". skills skills ." 100vh [row3-end]
         [row4-start] ". contact contact ." 100vh [row4-end]
         [row5-start] "footer footer footer footer" 30px [row5-end]
 
         / 2% auto auto 2%;
   }
+
 }
 .section{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    overflow: hidden;
-    pointer-events: none;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  pointer-events: none;
+  
 }
 
 
@@ -59,15 +70,15 @@ h1 {
   
     text-transform: uppercase;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    /* filter: drop-shadow(4px 4px 8px var(--color-shadow)); */
   }
 
   
   h1 b{
     color: var(--color-accent);
-    display: inline-block;
     padding: 0px 8px;
-
 
   }
   
@@ -78,6 +89,7 @@ h1 {
     display: inline-block;
     width: 100%;
     padding: 20px 0px 20px 0px;
+    /* filter: drop-shadow(0 0 5px var(--color-shadow)); */
   }
 
   h2 a{
@@ -94,6 +106,7 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
+    filter: drop-shadow(0 0 5px var(--color-shadow));
     /* padding: 20px 0px 20px 0px; */
   }
 
@@ -107,3 +120,5 @@ h1 {
     color: var(--color-80);
     font-size: 14px;
   }
+
+

@@ -1,7 +1,6 @@
-import { ContactShadows, Environment, Sphere, OrbitControls, PerspectiveCamera, Plane, useGLTF, Text} from '@react-three/drei'
+import { Environment, PerspectiveCamera, Plane, useGLTF, Text} from '@react-three/drei'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Camera, Fog, Quaternion} from 'three'
-import React, { useRef, useState, useEffect, Suspense } from 'react'
+import React, { useRef, useState, Suspense } from 'react'
 import * as THREE from "three";
 import styles from '../styles/scene.module.css'
 import useStore from "../store";
@@ -9,20 +8,7 @@ import useStore from "../store";
 
 export default function Scene() {
 
-
-  // const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-  // const [timer, setTimer] = useState(0)
-  // const countRef = useRef(0)
-
-  // function start(){
-  //   countRef.current = setInterval(() => {
-  //     setTimer((timer) => timer + 1)
-  //   }, 1000)
-  // }
-  
-// start()
   let percent = useStore((state)=> state.position)
-
 
   const wrapper = {
     position: "fixed",
@@ -33,66 +19,45 @@ export default function Scene() {
     zIndex: -1
   };
 
-  const cover = {
-    position:"absolute",
-    lef: 0,
-    top: 0,
-    width: "100%",
-    height: "100%",
-    backgroundColor: "var(--color-10)",
-    opacity: (percent/100) - 0.3,
-    zIndex: 10,
-    pointerEvents: "none"
-
-  };
-
 
 return(
 
-
-
   <div style={wrapper}>
-    <div className={styles.cover} style={{opacity: (percent/100) - 0.46}}/>
+    <div className={styles.cover} style={{opacity: (percent/100) - 0.40}}/>
     <Canvas shadows colorManagement
     // pixelRatio={window.devicePixelRatio}
 
-    style={{width: "100vw", height: "100vh", pointerEvents: "all"}} orthographic={false}  camera={{ position: [10, 8, 10], fov: 60 }}>
+    style={{width: "100vw", height: "100vh", pointerEvents: "all"}}>
       <ambientLight intensity={0.3}/>
 
-      
+      <PerspectiveCamera  makeDefault position={[10, 3.3, 16]} fov={60}/>
       <Suspense fallback={null}>
   
       
-      {/* <fog attach="fog" args={["white", 0, 100]} /> */}
-        <Brain percent={percent} position={[4+(-percent/10), 3, percent/24]} rotation={[0, + (percent + 32.5) * (Math.PI / 180) * 2, 0]} scale={percent * 0.001 + 0.225}/>
+        {/* <fog attach="fog" args={["white", 0, 100]} /> */}
+        <Brain percent={percent} position={[13 + (-percent/7), 10, percent/100]} rotation={[0, + (percent -2) * (Math.PI / 180) * 3, 0]} scale={percent * 0.001 + 0.2}/>
         <directionalLight
           castShadow
-          position={[10, 30, 20]}
+          position={[0, 30, 0]}
           intensity={2.6}
           shadow-mapSize-width={2048}
           shadow-mapSize-height={2048}
           shadow-camera-far={80}
-          shadow-camera-left={-20}
-          shadow-camera-right={20}
-          shadow-camera-top={20}
-          shadow-camera-bottom={-20}
+          shadow-camera-left={-30}
+          shadow-camera-right={30}
+          shadow-camera-top={30}
+          shadow-camera-bottom={-30}
           // shadow-camera-near={0.1}
         />
       
-
-      {/* <spotLight position={[0, 5, 0]} angle={1} penumbra={1} intensity={1} castShadow shadow-mapSize={[512, 512]} /> */}
-        
-   
-      
         <Plane
           receiveShadow
-          blur={2}
+          blur={20}
           rotation={[-Math.PI / 2, 0, 0]}
-          position={[0, -1.5, 0]}
+          position={[0, -1, 0]}
           args={[3000, 3000]}
           material={new THREE.ShadowMaterial({color: "rgb(16, 16, 16)", side: 0, opacity:  (0.07 - (percent * 0.002))})}
         />
-  
         
         <Environment files="hdr/hdr.hdr"/>
 
@@ -106,7 +71,7 @@ return(
 }
 
 
-function Brain({ position,percent, rotation, scale }) {
+function Brain({ position, percent, rotation, scale }) {
   const group = useRef()
   const { nodes, materials } = useGLTF('/models/brain.gltf')
 
@@ -121,14 +86,17 @@ function Brain({ position,percent, rotation, scale }) {
       maxRadius: 10
     },
       nodes: [
-        {name: 'Rhino', height: 6, delay: 10, radius: 10} , {name: 'Grasshopper', height: 2, delay: 0, radius: 14}
+        {name: 'RHINO', height: 6, delay: 10, radius: 10} , 
+        {name: 'GRASSHOPPER', height: 2, delay: 0, radius: 14},
+        {name: 'NODE JS', height: 10, delay: 30, radius: 20} , 
       ]
     }
   
   
   const material_accent = new THREE.MeshStandardMaterial({color: 0xff1e00, roughness: 0.1, metalness: 0.3, flatShading: false, side: 2})
+  const material_hover = new THREE.MeshStandardMaterial({color: 0x0000FF, roughness: 0.1, metalness: 0.2, opacity: 0.6, flatShading: false, side: 2})
   const material_night = new THREE.MeshStandardMaterial({color: 0x999999, roughness: 0.2, metalness: 0.2, flatShading: false, side: 2})
-  const material_day = new THREE.MeshStandardMaterial({color: 0x181818, roughness: 0.14, metalness: 0.5, flatShading: false, side: 2})
+  const material_day = new THREE.MeshStandardMaterial({color: 0xA9A9A9, roughness: 0.1, metalness: 0.3, flatShading: false, side: 2})
 
   function base_material(){
     if(mode === 'night')
@@ -139,6 +107,19 @@ function Brain({ position,percent, rotation, scale }) {
 
   const value_1 = percent / 8;
   const value_2 = percent / 4;
+
+  const assignMaterial=()=>{
+    if(active){
+      return material_hover
+    }
+    else if(hovered){
+      return material_hover
+      
+    }
+    else{
+      return base_material()
+    }
+  }
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime()
@@ -154,6 +135,8 @@ function Brain({ position,percent, rotation, scale }) {
     dispose={null} 
     onPointerOver={(event) => setHover(true)}
     onPointerOut={(event) => setHover(false)}
+    onClick={(event) => setActive(!active)}
+
     >
 
       <pointLight 
@@ -163,21 +146,18 @@ function Brain({ position,percent, rotation, scale }) {
       distance={percent * 0.6}
       decay={1}
       />
-
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.mesh_7.geometry}
-        material={hovered ? material_accent : base_material()}
+        material={assignMaterial()}
         position={[-value_1, -value_1, value_1]}
-        scale={active ? 1.5 : 1}
-        onClick={(event) => setActive(!active)}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.mesh_8.geometry}
-        material={base_material()}
+        material={assignMaterial()}
         position={[-value_2, value_1, value_2]}
 
       />
@@ -185,15 +165,14 @@ function Brain({ position,percent, rotation, scale }) {
         castShadow
         receiveShadow
         geometry={nodes.mesh_9.geometry}
-        material={base_material()}
+        material={assignMaterial()}
         position={[value_1, -value_1, value_1]}
-
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.mesh_10.geometry}
-        material={base_material()}
+        material={assignMaterial()}
         position={[value_2, value_1, value_2]}
 
       />
@@ -208,34 +187,34 @@ function Brain({ position,percent, rotation, scale }) {
         castShadow
         receiveShadow
         geometry={nodes.mesh_2.geometry}
-        material={base_material()}
+        material={assignMaterial()}
         position={[-value_2, value_1, -value_2]}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.mesh_3.geometry}
-        material={base_material()}
+        material={assignMaterial()}
         position={[value_2, value_1, -value_2]}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.pitua.geometry}
-        material={base_material()}
+        material={material_accent}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.mesh_5.geometry}
-        material={base_material()}
+        material={assignMaterial()}
         position={[-value_1, -value_1, -value_1]}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.mesh_6.geometry}
-        material={base_material()}
+        material={assignMaterial()}
         position={[value_1, -value_1, -value_1]}
 
       />
@@ -267,21 +246,22 @@ function Element( {cycle, position, percent, delay, radius, name} ){
 
 
   return(
-    <group ref={group} position={[x, y, z ]} scale={percent /100}>
+    <group ref={group} position={[x, y, z ]}  scale={percent /100}>
       {/* <Sphere width> */}
-      <Sphere material={material} scale={6}>
+      {/* <Sphere material={material} scale={6}> */}
  
         <Text
           depthTest={false}
           material-toneMapped={false}
-          scale={[6,6,6]}
+          scale={[30,30,30]}
+          font="/fonts/Qual.otf"
           color="rgb(255, 102, 51)" // default
           anchorX="center" // default
           anchorY="middle" // default
         >
           {name}
         </Text>
-      </Sphere>
+      {/* </Sphere> */}
 
     </group>
 
@@ -289,6 +269,3 @@ function Element( {cycle, position, percent, delay, radius, name} ){
 }
 
 useGLTF.preload('/brain.gltf')
-
-
-useGLTF.preload('/models/VictorianBuilding.gltf')

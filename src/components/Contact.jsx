@@ -2,13 +2,17 @@ import React from 'react'
 import styles from '../styles/contact.module.css'
 import emailjs from 'emailjs-com';
 
+
+
 export default function Contact() {
+
     
     const id = {
-        service: "service_32scc1g",
-        template: "template_y011vg3",
-        user: "user_WQCFwDhXed9ZfE1zpPM6B"
+        service: String(process.env.REACT_APP_EMAIL_SERVICE),
+        template: String(process.env.REACT_APP_EMAIL_TEMPLATE),
+        user: String(process.env.REACT_APP_EMAIL_USER)
     }
+
     
     function sendEmail(event) {
         event.preventDefault();
@@ -32,7 +36,7 @@ export default function Contact() {
                 <label className={styles.label} placeholder="Your email">Email</label>
                 <input className={styles.field} type="email" name="email" />
 
-                <label className={styles.label} placeholder="Enter your message" maxlength="2000">Message</label>
+                <label className={styles.label} placeholder="Enter your message" maxLength="2000">Message</label>
                 <textarea className={styles.textarea} name="message"/>
                 <button>Submit</button>
             </form>

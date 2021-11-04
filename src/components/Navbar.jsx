@@ -1,13 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from '../styles/navbar.module.css'
 import useStore from '../store';
 
-export default function Navbar({ onLanguageChange, children}) {
-
-
-    
-
+export default function Navbar({ children }) {
 
     //#region 
     const[isDark, setIsDark] = useState(false);
@@ -65,7 +61,7 @@ export default function Navbar({ onLanguageChange, children}) {
     return(
         <nav className={styles.navbar} style={{position: "fixed"}}>
             <div style={{width: "100%", height: "4px", backgroundColor: "var(--color-accent)"}}/>
-            <div style={{width: `calc(100% / 100 * ${position}`, height: "8px", backgroundColor: "var(--color-accent)"}}/>
+            <div style={{width: `calc(100% / 100 * ${position}`, height: "4px", backgroundColor: "var(--color-accent)"}}/>
 
             <div style={{ height: "var(--height-navbar)", display: "flex", alignItems: "center", padding: "0 var(--padding-navbar) 0 var(--padding-navbar)" }}>
                 <div href="/" style={{display: "flex", height: "100%", alignItems: "center", justifyContent: "center"}}>
@@ -259,7 +255,7 @@ export function NavbarItem({ name, href, children, onClick, ref }){
     )
 };
 
-export function Button({ onClick, icon, text, to }){
+export function Button({ onClick, icon, to }){
 
     const[isOver, setIsOver]=useState(false);
     
@@ -282,22 +278,12 @@ export function Button({ onClick, icon, text, to }){
         transition: "0.2s",
     };
 
-    const label = {
-        fontFamily: "var(--font-family-special)",
-        fontSize: "var(--font-size-medium)",
-        textTransform: "uppercase",
-        height: "12px",
-        color: isOver ? "var(--color-accent)" : "var(--color-contrast-high)",
-        transition: "0.2s",
-    };
-
     const wrapper = {
         height: "100%", 
         display: "flex", 
         alignItems: "center", 
         justifyContent: "center",
         flexDirection: "column",
-        marginTop: "12px"
     };
     //#endregion
 
@@ -336,9 +322,6 @@ export function Button({ onClick, icon, text, to }){
             <div style={button} >
                 {returnIcon(icon)}
             </div>
-            {/* <div style={label}>
-                {text}
-            </div> */}
         </div>
     )
 };
