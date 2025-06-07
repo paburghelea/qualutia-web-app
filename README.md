@@ -1,4 +1,4 @@
-qualutia-web-app
+Qualutia Webapp
 ======================
 Intial site for qualutia.com developed with React CRA. Designed to be hostable on Bluehost. 
 
